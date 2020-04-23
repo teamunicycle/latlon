@@ -22,10 +22,10 @@ let lng : f64 = latlon::parse_lng("E 14°26.94732'").unwrap();
 
 Example of supported formats:
 
-- `40° 26′ 46″ N 79° 58′ 56″ W`
-- `N 40° 26′ 46″ W 79° 58′ 56″`
+- `40° 26' 46" N 79° 58' 56" W`
+- `N 40° 26' 46" W 79° 58' 56"`
 - `40° 26.767' N 79° 58.933' W`
-- `40° 26′ 46″ 79° 58′ 56″`, `40° 26′ 46″, 79° 58′ 56″`, ...
+- `40° 26' 46" 79° 58' 56"`, `40° 26' 46", 79° 58' 56"`, ...
 - `N 40° 26.767' W 79° 58.933'`
 - `40° 26.767' 79° 58.933'`, `40° 26.767', 79° 58.933'`, ...
 - `N 40.446° W 79.982°`
@@ -37,7 +37,7 @@ Example of supported formats:
 - Whitespace is optional and ignored, except for formats that would become unparsable.
 - Degree, minute and second symbols can be omitted.
 - Comma (`,`) may be used as an alternate decimal separator.
-- Unicode quotes (`’`, `”`) may be used in place of apostrophe and double quote (`'`, `"`)
+- Unicode quotes (e.g. `’`, `”`) are supported
   for minutes and seconds.
-- The two coordinates can be separated by comma (`,`), semicolon (`;`), whitespace (` `), or nothing
+- The two coordinates can be separated by comma (`,`), semicolon (`;`), whitespace, or nothing
   at all, if not ambiguous.

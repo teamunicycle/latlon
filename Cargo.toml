@@ -1,6 +1,6 @@
 [package]
 name = "latlon"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Ondřej Hruška <ondra@ondrovo.com>"]
 description = "Parse latitude/longitude from many common formats"
 edition = "2018"

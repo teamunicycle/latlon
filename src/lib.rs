@@ -18,98 +18,98 @@ use crate::errors::ParseErrorInternal;
 // Two-sided patterns
 lazy_static! {
     // 40° 26′ 46″ N 79° 58′ 56″ W
-    static ref RE_DMS_NS_DMS_EW: Regex = Regex::new(r"(?x)
+    static ref RE_DMS_NS_DMS_EW: Regex = Regex::new(r#"(?x)
         ^
         (-?\d{1,2})(?:°\s*|\s+)
-        (\d{1,2})(?:[’′]\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[″”]?\s*
+        (\d{1,2})(?:[’'′‘‛]\s*|\s+)
+        (\d{1,2}(?:[.,]\d+)?)[″”"“]?\s*
         (N|S)
         \s*
         [,;]?
         \s*
         (-?\d{1,3})(?:°\s*|\s+)
-        (\d{1,2})(?:[’′]\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[″”]?\s*
+        (\d{1,2})(?:[’'′‘‛]\s*|\s+)
+        (\d{1,2}(?:[.,]\d+)?)[″”"“]?\s*
         (E|W)
         $
-        ").unwrap();
+        "#).unwrap();
 
     // N 40° 26′ 46″ W 79° 58′ 56″
-    static ref RE_NS_DMS_EW_DMS: Regex = Regex::new(r"(?x)
+    static ref RE_NS_DMS_EW_DMS: Regex = Regex::new(r#"(?x)
         ^
         (N|S)\s*
         (-?\d{1,2})(?:°\s*|\s+)
-        (\d{1,2})(?:[’′]\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[″”]?
+        (\d{1,2})(?:[’'′‘‛]\s*|\s+)
+        (\d{1,2}(?:[.,]\d+)?)[″”"“]?
         \s*
         [,;]?
         \s*
         (E|W)\s*
         (-?\d{1,3})(?:°\s*|\s+)
-        (\d{1,2})(?:[’′]\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[″”]?
+        (\d{1,2})(?:[’'′‘‛]\s*|\s+)
+        (\d{1,2}(?:[.,]\d+)?)[″”"“]?
         $
-        ").unwrap();
+        "#).unwrap();
 
     // 40° 26′ 46″ 79° 58′ 56″
-    static ref RE_DMS_DMS: Regex = Regex::new(r"(?x)
+    static ref RE_DMS_DMS: Regex = Regex::new(r#"(?x)
         ^
         (-?\d{1,2})(?:°\s*|\s+)
-        (\d{1,2})(?:[’′]\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[″”]?\s*
+        (\d{1,2})(?:[’'′‘‛]\s*|\s+)
+        (\d{1,2}(?:[.,]\d+)?)[″”"“]?\s*
         [,;]?
         \s*
         (-?\d{1,3})(?:°\s*|\s+)
-        (\d{1,2})(?:[’′]\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[″”]?
+        (\d{1,2})(?:[’'′‘‛]\s*|\s+)
+        (\d{1,2}(?:[.,]\d+)?)[″”"“]?
         $
-        ").unwrap();
+        "#).unwrap();
 
     // 40° 26.767' N 79° 58.933' W
-    static ref RE_DM_NS_DM_EW: Regex = Regex::new(r"(?x)
+    static ref RE_DM_NS_DM_EW: Regex = Regex::new(r#"(?x)
         ^
         (-?\d{1,2})(?:°\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[’′]?\s*
+        (\d{1,2}(?:[.,]\d+)?)[’'′‘‛]?\s*
         (N|S)
         \s*
         [,;]?
         \s*
         (-?\d{1,3})(?:°\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[’′]?\s*
+        (\d{1,2}(?:[.,]\d+)?)[’'′‘‛]?\s*
         (E|W)
         $
-        ").unwrap();
+        "#).unwrap();
 
     // N 40° 26.767' W 79° 58.933'
-    static ref RE_NS_DM_EW_DM: Regex = Regex::new(r"(?x)
+    static ref RE_NS_DM_EW_DM: Regex = Regex::new(r#"(?x)
         ^
         (N|S)\s*
         (-?\d{1,2})(?:°\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[’′]?
+        (\d{1,2}(?:[.,]\d+)?)[’'′‘‛]?
         \s*
         [,;]?
         \s*
         (E|W)\s*
         (-?\d{1,3})(?:°\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[’′]?
+        (\d{1,2}(?:[.,]\d+)?)[’'′‘‛]?
         $
-        ").unwrap();
+        "#).unwrap();
 
     // 40° 26.767' 79° 58.933'
-    static ref RE_DM_DM: Regex = Regex::new(r"(?x)
+    static ref RE_DM_DM: Regex = Regex::new(r#"(?x)
         ^
         (-?\d{1,2})(?:°\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[’′]?
+        (\d{1,2}(?:[.,]\d+)?)[’'′‘‛]?
         \s*
         [,;]?
         \s*
         (-?\d{1,3})(?:°\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[’′]?
+        (\d{1,2}(?:[.,]\d+)?)[’'′‘‛]?
         $
-        ").unwrap();
+        "#).unwrap();
 
     // N 40.446° W 79.982°
-    static ref RE_NS_D_EW_D: Regex = Regex::new(r"(?x)
+    static ref RE_NS_D_EW_D: Regex = Regex::new(r#"(?x)
         ^
         (N|S)\s*
         (-?\d{1,2}(?:[.,]\d+)?)°?
@@ -119,10 +119,10 @@ lazy_static! {
         (E|W)\s*
         (-?\d{1,3}(?:[.,]\d+)?)°?
         $
-        ").unwrap();
+        "#).unwrap();
 
     // 40.446° N 79.982° W
-    static ref RE_D_NS_D_EW: Regex = Regex::new(r"(?x)
+    static ref RE_D_NS_D_EW: Regex = Regex::new(r#"(?x)
         ^
         (-?\d{1,2}(?:[.,]\d+)?)°?\s*
         (N|S)\s*
@@ -131,96 +131,96 @@ lazy_static! {
         (-?\d{1,3}(?:[.,]\d+)?)°?\s*
         (E|W)
         $
-        ").unwrap();
+        "#).unwrap();
 
     // 40.446° 79.982°
-    static ref RE_D_D: Regex = Regex::new(r"(?x)
+    static ref RE_D_D: Regex = Regex::new(r#"(?x)
         ^
         (-?\d{1,2}(?:[.,]\d+)?)(?:°\s*[,;]?\s*|\s*[,;]\s*|\s+)
         (-?\d{1,3}(?:[.,]\d+)?)°?
         $
-        ").unwrap();
+        "#).unwrap();
 }
 
 // One-sided patterns
 lazy_static! {
     // 40° 26′ 46″ N
-    static ref RE_DMS_NSEW: Regex = Regex::new(r"(?x)
+    static ref RE_DMS_NSEW: Regex = Regex::new(r#"(?x)
         ^
         (-?\d{1,3})(?:°\s*|\s+)
-        (\d{1,2})(?:[’′]\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[″”]?\s*
+        (\d{1,2})(?:[’'′‘‛]\s*|\s+)
+        (\d{1,2}(?:[.,]\d+)?)[″”"“]?\s*
         (N|S|E|W)
         $
-        ").unwrap();
+        "#).unwrap();
 
     // N 40° 26′ 46″
-    static ref RE_NSEW_DMS: Regex = Regex::new(r"(?x)
+    static ref RE_NSEW_DMS: Regex = Regex::new(r#"(?x)
         ^
         (N|S|E|W)\s*
         (-?\d{1,3})(?:°\s*|\s+)
-        (\d{1,2})(?:[’′]\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[″”]?
+        (\d{1,2})(?:[’'′‘‛]\s*|\s+)
+        (\d{1,2}(?:[.,]\d+)?)[″”"“]?
         $
-        ").unwrap();
+        "#).unwrap();
 
     // 40° 26′ 46″
-    static ref RE_DMS: Regex = Regex::new(r"(?x)
+    static ref RE_DMS: Regex = Regex::new(r#"(?x)
         ^
         (-?\d{1,3})(?:°\s*|\s+)
-        (\d{1,2})(?:[’′]\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[″”]?\s*
+        (\d{1,2})(?:[’'′‘‛]\s*|\s+)
+        (\d{1,2}(?:[.,]\d+)?)[″”"“]?\s*
         $
-        ").unwrap();
+        "#).unwrap();
 
     // 40° 26.767' N
-    static ref RE_DM_NSEW: Regex = Regex::new(r"(?x)
+    static ref RE_DM_NSEW: Regex = Regex::new(r#"(?x)
         ^
-        (-?\d{1,2})(?:°\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[’′]?\s*
+        (-?\d{1,3})(?:°\s*|\s+)
+        (\d{1,2}(?:[.,]\d+)?)[’'′‘‛]?\s*
         (N|S|E|W)
         $
-        ").unwrap();
+        "#).unwrap();
 
     // N 40° 26.767'
-    static ref RE_NSEW_DM: Regex = Regex::new(r"(?x)
+    static ref RE_NSEW_DM: Regex = Regex::new(r#"(?x)
         ^
         (N|S|E|W)\s*
-        (-?\d{1,2})(?:°\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[’′]?
+        (-?\d{1,3})(?:°\s*|\s+)
+        (\d{1,2}(?:[.,]\d+)?)[’'′‘‛]?
         $
-        ").unwrap();
+        "#).unwrap();
 
     // 40° 26.767'
-    static ref RE_DM: Regex = Regex::new(r"(?x)
+    static ref RE_DM: Regex = Regex::new(r#"(?x)
         ^
-        (-?\d{1,2})(?:°\s*|\s+)
-        (\d{1,2}(?:[.,]\d+)?)[’′]?
+        (-?\d{1,3})(?:°\s*|\s+)
+        (\d{1,2}(?:[.,]\d+)?)[’'′‘‛]?
         $
-        ").unwrap();
+        "#).unwrap();
 
     // N 40.446°
-    static ref RE_NSEW_D: Regex = Regex::new(r"(?x)
+    static ref RE_NSEW_D: Regex = Regex::new(r#"(?x)
         ^
         (N|S|E|W)\s*
-        (-?\d{1,2}(?:[.,]\d+)?)°?
+        (-?\d{1,3}(?:[.,]\d+)?)°?
         $
-        ").unwrap();
+        "#).unwrap();
 
     // 40.446° N
-    static ref RE_D_NSEW: Regex = Regex::new(r"(?x)
+    static ref RE_D_NSEW: Regex = Regex::new(r#"(?x)
         ^
-        (-?\d{1,2}(?:[.,]\d+)?)°?\s*
+        (-?\d{1,3}(?:[.,]\d+)?)°?\s*
         (N|S|E|W)
         $
-        ").unwrap();
+        "#).unwrap();
 
     // 40.446°
-    static ref RE_D: Regex = Regex::new(r"(?x)
+    static ref RE_D: Regex = Regex::new(r#"(?x)
         ^
-        (-?\d{1,2}(?:[.,]\d+)?)°?
+        (-?\d{1,3}(?:[.,]\d+)?)°?
         $
-        ").unwrap();
+        "#).unwrap();
 }
 
 /// Parsed degrees, minutes, seconds

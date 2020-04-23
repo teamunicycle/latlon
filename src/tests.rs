@@ -206,6 +206,16 @@ fn dms() {
     assert_eq!(reference, parse_lng(r#"40°26′46″"#).unwrap(), "compact");
     assert_eq!(reference, parse_lng(r#"40 26 46"#).unwrap(), "no symbols");
     assert_eq!(ref_neg, parse_lng(r#"-40° 26′ 46″"#).unwrap(), "neg");
+
+    // Test all the weird quotation marks
+
+    // ’'′‘‛
+    // ″”"“
+    assert_eq!(reference, parse_lng(r#"40° 26’ 46″"#).unwrap(), "normal");
+    assert_eq!(reference, parse_lng(r#"40° 26' 46”"#).unwrap(), "normal");
+    assert_eq!(reference, parse_lng(r#"40° 26′ 46""#).unwrap(), "normal");
+    assert_eq!(reference, parse_lng(r#"40° 26‘ 46“"#).unwrap(), "normal");
+    assert_eq!(reference, parse_lng(r#"40° 26‛ 46″"#).unwrap(), "normal");
 }
 
 #[test]
