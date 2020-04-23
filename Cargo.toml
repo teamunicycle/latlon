@@ -1,0 +1,13 @@
+[package]
+name = "latlon"
+version = "0.1.0"
+authors = ["Ondřej Hruška <ondra@ondrovo.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+geo-types = "0.5.0"
+regex = "1.3.7"
+lazy_static = "1.4.0"
+
