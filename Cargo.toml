@@ -5,6 +5,7 @@ authors = ["Ondřej Hruška <ondra@ondrovo.com>"]
 description = "Parse latitude/longitude from many common formats"
 edition = "2018"
 readme = "README.md"
+repository = "https://git.ondrovo.com/packages/latlon"
 keywords = ["gps", "geo", "geography", "geospatial", "location", "parse"]
 categories = ["parser-implementations", "science"]
 license = "MIT"
