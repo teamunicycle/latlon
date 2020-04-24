@@ -1,7 +1,9 @@
 #[macro_use]
 extern crate lazy_static;
 
-use geo_types::Point;
+// re-export Point so `geo_types` do not have to be added as a dependency
+// to store the `parse()` function's result.
+pub use geo_types::Point;
 
 use regex::Regex;
 use std::convert::TryFrom;
