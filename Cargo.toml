@@ -1,6 +1,6 @@
 [package]
 name = "latlon"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Ondřej Hruška <ondra@ondrovo.com>"]
 description = "Parse latitude/longitude from many common formats"
 edition = "2018"
@@ -11,6 +11,6 @@ categories = ["parser-implementations", "science"]
 license = "MIT"
 
 [dependencies]
-geo-types = "0.5.0"
-regex = "1.3.7"
-lazy_static = "1.4.0"
+geo-types = "0.7"
+regex = "1"
+lazy_static = "1.4"

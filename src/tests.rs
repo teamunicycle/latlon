@@ -1,4 +1,4 @@
-use crate::{parse, parse_lat, parse_lng};
+use crate::{parse, parse_lat, parse_lng, GeoParseError};
 use geo_types::Point;
 
 #[test]
@@ -471,4 +471,19 @@ fn d() {
     parse_lng(r#"180.0000°"#).unwrap();
     parse_lng(r#"-180°"#).unwrap();
     parse_lng(r#"1°"#).unwrap();
+}
+
+#[test]
+fn error() {
+    let e = GeoParseError("Hello");
+    assert_eq!("GeoParseError(\"Hello\")", format!("{:?}", e));
+    assert_eq!("GeoParseError(\n    \"Hello\",\n)", format!("{:#?}", e));
+
+    let e = GeoParseError("Hello2".to_string());
+    assert_eq!("GeoParseError(\"Hello2\")", format!("{:?}", e));
+    assert_eq!("GeoParseError(\n    \"Hello2\",\n)", format!("{:#?}", e));
+
+    let e = GeoParseError(std::borrow::Cow::Owned("Foo".to_string()));
+    assert_eq!("GeoParseError(\"Foo\")", format!("{:?}", e));
+    assert_eq!("GeoParseError(\n    \"Foo\",\n)", format!("{:#?}", e));
 }

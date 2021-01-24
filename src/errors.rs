@@ -1,5 +1,5 @@
 use std::fmt;
-use std::fmt::{Display, Formatter};
+use std::fmt::{Display, Formatter, Debug};
 use std::num::ParseFloatError;
 
 #[derive(Debug)]
@@ -17,11 +17,20 @@ impl Display for ParseErrorInternal {
     }
 }
 
-#[derive(Debug)]
-pub struct GeoParseError<T: AsRef<str> + Display>(pub T);
+pub struct GeoParseError<T: AsRef<str>>(pub T);
 
-impl<T: AsRef<str> + Display> Display for GeoParseError<T> {
+impl<T: AsRef<str>> Display for GeoParseError<T> {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "Error parsing coordinates from {}", self.0)
+        write!(f, "Error parsing coordinates from {}", self.0.as_ref())
     }
 }
+
+impl<T : AsRef<str>> Debug for GeoParseError<T> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        f.debug_tuple("GeoParseError")
+            .field(&self.0.as_ref())
+            .finish()
+    }
+}
+
+impl<T : AsRef<str>> std::error::Error for GeoParseError<T> {}
